@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from './Feedback.module.css'
-
+import {Controls} from './Controls';
+import { Value } from './Value';
 export class Counter extends Component {
     static defaultProps = {
         initialValue: 0,
@@ -53,15 +54,22 @@ handleDecrement = () => {
 render() {
     return (
         <div className={css.Counter}>
-            <span className={css.Counter__value}>{this.state.value}</span>
-            <div className={css.Counter__controls}>
+            <Value
+            value={this.state.value}
+            />
+            {/* <span className={css.Counter__value}>{this.state.value}</span> */}
+            <Controls
+                onIncrement={this.handleIncrement}
+                onDecrement={this.handleDecrement}
+            />
+            {/* <div className={css.Counter__controls}>
                 <button type="button"
                     onClick={(this.handleIncrement)}
                 >😃 + 1</button>
                 <button type="button"
                     onClick={(this.handleDecrement)}
                 >😭 - 1</button>
-            </div>
+            </div> */}
         </div>
     )
 }
