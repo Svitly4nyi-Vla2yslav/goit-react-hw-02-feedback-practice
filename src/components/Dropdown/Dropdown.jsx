@@ -21,13 +21,14 @@ export class Dropdown extends Component {
     // }
 
     render() {
+        const {visible} = this.state;
         return (
             <div className={css.Dropdown}>
                 <button
                     type="button"
                     className={css.Dropdown__toggle}
                     onClick={this.toggle}
-                >{this.state.visible ? 'Скрыть🔐' : 'Показать 📖'}
+                >{visible ? 'Скрыть🔐' : 'Показать 📖'}
                 </button>
                 {/* <button type="button" className={css.Dropdown__toggle} onClick={this.hide}>Close</button> */}
                 {this.state.visible && (<div className={css.Dropdown__menu}>Menu</div>)}
