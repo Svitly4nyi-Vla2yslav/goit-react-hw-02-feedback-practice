@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import { Dropdown } from './Dropdown/Dropdown';
 // import {Counter} from './feedback/Feedback'
 import { TodoList } from './TodoList/TodoList';
+import initialTodos from '../Data/todos.json'
 // import { ColorPicker } from './ColorPicker/ColorPicker';
 
 // export const colorPickerOptions = [
@@ -15,22 +16,29 @@ import { TodoList } from './TodoList/TodoList';
 
 export class App extends Component {
   state = {
-    todos: [
-      {id: 'id-1', text: 'Вивчити основи React', completed: false},
-      {id: 'id-2', text: 'Розібратись с React Router', completed: false},
-      {id: 'id-3', text: 'Пережити Redux', completed: false},
+    todos: initialTodos,
+  }
 
-    ],
+  deleteTodo = (todoId) => {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }))
   }
   render() {
-    const {todos} = this.state;
+    const { todos } = this.state;
+    const totalTodoCount = todos.length;
+    const completedTodosCount = todos.reduce((acc, todo) => (todo.completed ? acc + 1 : acc), 0)
     return (
       <div
       >
         {/* <Dropdown /> */}
         {/* <Counter initialValue={ 0} /> */}
         {/* <ColorPicker options={colorPickerOptions} /> */}
-        <TodoList todos={todos}/>
+        <div>
+          <p>Загальна кількість:  {totalTodoCount}</p>
+          <p>Кількість виконаних:  {completedTodosCount}</p>
+        </div>
+        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
       </div>
     );
   }
